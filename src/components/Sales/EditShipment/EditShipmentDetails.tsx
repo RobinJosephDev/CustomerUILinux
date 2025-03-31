@@ -16,9 +16,9 @@ interface EditShipmentDetailsProps {
 
 const shipmentSchema = z.object({
   ship_load_date: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be in YYYY-MM-DD format')
-    .optional(),
+  .string()
+  .regex(/^\d{2}-\d{2}-\d{4}$/, { message: 'Date must be in DD-MM-YYYY format' })
+  .optional(),
   ship_pickup_location: z
     .string()
     .max(150, 'Address too long')
