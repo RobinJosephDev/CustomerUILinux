@@ -16,9 +16,9 @@ interface ShipmentDetailsProps {
 
 const shipmentSchema = z.object({
   ship_load_date: z
-  .string()
-  .regex(/^\d{2}-\d{2}-\d{4}$/, { message: 'Date must be in DD-MM-YYYY format' })
-  .optional(),
+    .string()
+    .regex(/^\d{2}-\d{2}-\d{4}$/, { message: 'Date must be in DD-MM-YYYY format' })
+    .optional(),
   ship_pickup_location: z
     .string()
     .max(150, 'Address too long')
@@ -35,7 +35,7 @@ const shipmentSchema = z.object({
     .regex(/^[a-zA-Z0-9\s.,'-]*$/, 'Only letters, numbers,spaces, apostrophes, periods, commas, and hyphens allowed')
     .optional(),
   ship_weight: z.number().positive('Weight must be a positive number').max(999999, 'Weight must not exceed 999,999').optional(),
-  ship_ftl_ltl: z.enum(['FTL', 'LTL'], { message: 'Please select a valid load type' }),
+  ship_ftl_ltl: z.enum(['FTL', 'LTL'], { message: 'Please select a valid load type' }).optional(),
   ship_equipment: z
     .string()
     .max(150, 'Equipment must be at most 150 characters')
