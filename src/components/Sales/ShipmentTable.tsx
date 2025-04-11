@@ -1,15 +1,14 @@
 import { Table, TableHeader } from '../common/Table';
 import Modal from '../common/Modal';
+import '../../styles/Form.css';
 import EditShipmentForm from './EditShipment/EditShipmentForm';
-import AddShipmentForm from './AddShipment/AddShipmentForm';
-import { EditOutlined, DeleteOutlined, SearchOutlined, PlusOutlined, EyeOutlined, MailOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, SearchOutlined, EyeOutlined, MailOutlined } from '@ant-design/icons';
 import ViewShipmentForm from './ViewShipment/ViewShipmentForm';
 import Pagination from '../common/Pagination';
 import useShipmentTable from '../../hooks/table/useShipmentTable';
 
 const ShipmentTable: React.FC = () => {
   const {
-    fetchShipments,
     shipments,
     loading,
     searchQuery,
@@ -17,13 +16,10 @@ const ShipmentTable: React.FC = () => {
     sortBy,
     sortDesc,
     selectedIds,
-    setSelectedIds,
     paginatedData,
     totalPages,
     currentPage,
-    setCurrentPage,
     isEditModalOpen,
-    isAddModalOpen,
     isViewModalOpen,
     isEmailModalOpen,
     selectedShipment,
@@ -31,15 +27,10 @@ const ShipmentTable: React.FC = () => {
     closeEditModal,
     openViewModal,
     closeViewModal,
-    setEditModalOpen,
-    setAddModalOpen,
-    setViewModalOpen,
     setEmailModalOpen,
     toggleSelectAll,
     toggleSelect,
     deleteSelected,
-    emailData,
-    setEmailData,
     sendEmails,
     handleSort,
     updateShipment,
@@ -97,9 +88,6 @@ const ShipmentTable: React.FC = () => {
             <SearchOutlined className="search-icon" />
             <input className="search-bar" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           </div>
-          <button onClick={() => setAddModalOpen(true)} className="add-button">
-            <PlusOutlined />
-          </button>
           <button onClick={() => setEmailModalOpen(true)} className="send-email-button" disabled={selectedIds.length === 0}>
             <MailOutlined />
           </button>
@@ -125,10 +113,6 @@ const ShipmentTable: React.FC = () => {
         />
       )}
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-
-      <Modal isOpen={isAddModalOpen} onClose={() => setAddModalOpen(false)} title="Add Shipment">
-        <AddShipmentForm onClose={() => setAddModalOpen(false)} onSuccess={fetchShipments} />
-      </Modal>
 
       <Modal isOpen={isEditModalOpen} onClose={closeEditModal} title="Edit Shipment">
         {selectedShipment ? (
